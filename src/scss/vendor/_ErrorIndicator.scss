@@ -1,0 +1,12 @@
+.error-indicator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: rgb(175, 33, 33);
+  font-style: italic;
+  img {
+    max-width: 50px;
+  }
+}
