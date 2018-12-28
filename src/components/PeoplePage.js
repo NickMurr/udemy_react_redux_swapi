@@ -1,13 +1,24 @@
+/* eslint-disable react/no-multi-comp */
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import ItemList from './ItemList';
 import PersonDetails from './PersonDetails';
 import ErrorIndicator from './ErrorIndicator';
+import SwapiService from '../services/swapi-service';
+import ErrorBoundry from './ErrorBoundry';
+
+const Row = ({ left, right }) => (
+  <div className="row mb2">
+    <div className="col-md-6">{left}</div>
+    <div className="col-md-6">{right}</div>
+  </div>
+);
 
 class PeoplePage extends Component {
+  swapiService = new SwapiService();
+
   state = {
-    selectedPerson: 5,
-    hasError: false
+    selectedPerson: 5
   };
 
   onPersonSelected = id => {
@@ -15,12 +26,6 @@ class PeoplePage extends Component {
       selectedPerson: id
     });
   };
-
-  componentDidCatch() {
-    this.setState({
-      hasError: true
-    });
-  }
 
   render() {
     const { hasError } = this.state;
@@ -30,17 +35,21 @@ class PeoplePage extends Component {
     }
     const { selectedPerson } = this.state;
 
+    const itemList = (
+      <ItemList
+        onItemSelected={this.onPersonSelected}
+        getData={this.swapiService.getAllPeople}
+      >
+        {i => `${i.name} (${i.birthYear})`}
+      </ItemList>
+    );
+
+    const personDetails = <PersonDetails personId={selectedPerson} />;
+
     return (
-      <React.Fragment>
-        <div className="row mb2">
-          <div className="col-md-6">
-            <ItemList onItemSelected={this.onPersonSelected} />
-          </div>
-          <div className="col-md-6">
-            <PersonDetails personId={selectedPerson} />
-          </div>
-        </div>
-      </React.Fragment>
+      <ErrorBoundry>
+        <Row left={itemList} right={personDetails} />
+      </ErrorBoundry>
     );
   }
 }

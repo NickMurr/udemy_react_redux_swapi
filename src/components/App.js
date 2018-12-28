@@ -6,10 +6,10 @@ import RandomPlanet from './RandomPlanet';
 import '../scss/main.scss';
 import PeoplePage from './PeoplePage';
 
+import SwapiService from '../services/swapi-service';
+
 class App extends Component {
-  state = {
-    // selectedPerson: 1
-  };
+  swapiService = new SwapiService();
 
   render() {
     return (

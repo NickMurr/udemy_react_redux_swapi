@@ -92,9 +92,9 @@ const PersonView = ({ person }) => {
   );
 };
 
-PersonDetails.propTypes = {
-  personId: PropTypes.number.isRequired
-};
+// PersonDetails.propTypes = {
+//   personId: PropTypes.string.isRequired
+// };
 
 PersonView.propTypes = {
   person: PropTypes.object.isRequired
