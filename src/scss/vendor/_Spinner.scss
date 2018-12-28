@@ -79,3 +79,11 @@
   -webkit-transform: translate(-44px, -44px) scale(0.44) translate(44px, 44px);
   transform: translate(-44px, -44px) scale(0.44) translate(44px, 44px);
 }
+.lds-css {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}

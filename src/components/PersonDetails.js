@@ -45,7 +45,7 @@ export default class PersonDetails extends Component {
   render() {
     const { person } = this.state;
     if (!person) {
-      return <span>Please choose a character</span>;
+      return <Spinner />;
     }
     const { loading } = this.state;
     const hasdata = !loading;
