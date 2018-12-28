@@ -47,39 +47,42 @@ class SwapiService {
     return item.url.match(idRegExp)[1];
   }
 
-  _transformPlanet(planet) {
-    return {
-      id: this._extractId(planet),
-      name: planet.name,
-      population: planet.population,
-      rotationPeriod: planet.rotation_period,
-      diameter: planet.diameter
-    };
-  }
+  _transformPlanet = planet => ({
+    id: this._extractId(planet),
+    name: planet.name,
+    population: planet.population,
+    rotationPeriod: planet.rotation_period,
+    diameter: planet.diameter
+  });
 
-  _transformStarship(starship) {
-    return {
-      id: this._extractId(starship),
-      name: starship.name,
-      model: starship.model,
-      manufacture: starship.manufacture,
-      costInCredits: starship.costInCredits,
-      length: starship.length,
-      crew: starship.crew,
-      passengers: starship.passengers,
-      cargoCapacity: starship.cargoCapacity
-    };
-  }
+  _transformStarship = starship => ({
+    id: this._extractId(starship),
+    name: starship.name,
+    model: starship.model,
+    manufacture: starship.manufacture,
+    costInCredits: starship.costInCredits,
+    length: starship.length,
+    crew: starship.crew,
+    passengers: starship.passengers,
+    cargoCapacity: starship.cargoCapacity
+  });
 
-  _transformPerson(person) {
-    return {
-      id: this._extractId(person),
-      name: person.name,
-      gender: person.gender,
-      birthYear: person.birthYear,
-      eyeColor: person.eyeColor
-    };
-  }
+  _transformPerson = person => ({
+    id: this._extractId(person),
+    name: person.name,
+    gender: person.gender,
+    birthYear: person.birth_year,
+    eyeColor: person.eye_color
+  });
 }
 
 export default SwapiService;
+
+// const arr1 = [1, 5, 8, 10];
+// const arr2 = [2, 4, 7];
+
+// const output = [...arr1, ...arr2]
+//   .sort((a, b) => a - b)
+//   .reverse()
+//   .reduce((prev, curr) => prev + curr);
+// console.log(output);

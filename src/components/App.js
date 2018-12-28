@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import Header from './Header';
 import RandomPlanet from './RandomPlanet';
@@ -6,31 +6,34 @@ import ItemList from './ItemList';
 import PersonDetails from './PersonDetails';
 import '../scss/main.scss';
 
-const App = () => {
-  const arr1 = [1, 5, 8, 10];
-  const arr2 = [2, 4, 7];
+class App extends Component {
+  state = {
+    selectedPerson: 1
+  };
 
-  const output = [...arr1, ...arr2]
-    .sort((a, b) => a - b)
-    .reverse()
-    .reduce((prev, curr) => prev + curr);
-  console.log(output);
+  onPersonSelected = id => {
+    this.setState({
+      selectedPerson: id
+    });
+  };
 
-  return (
-    <div className="container">
-      <Header />
-      <RandomPlanet />
-
-      <div className="row mb2">
-        <div className="col-md-6">
-          <ItemList />
-        </div>
-        <div className="col-md-6">
-          <PersonDetails />
+  render() {
+    const { selectedPerson } = this.state;
+    return (
+      <div className="container">
+        <Header />
+        <RandomPlanet />
+        <div className="row mb2">
+          <div className="col-md-6">
+            <ItemList onItemSelected={this.onPersonSelected} />
+          </div>
+          <div className="col-md-6">
+            <PersonDetails personId={selectedPerson} />
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default App;

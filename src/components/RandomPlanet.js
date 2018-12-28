@@ -1,6 +1,9 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/forbid-prop-types */
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import SwapiService from '../services/swapi-service';
 import Spinner from './Spinner';
 import ErrorIndicator from './ErrorIndicator';
@@ -13,17 +16,9 @@ class RandomPlanet extends Component {
     loading: true
   };
 
-  // constructor() {
-  //   super();
-  // }
-
   componentDidMount() {
     this.updatePlanet();
     this.interval = setInterval(this.updatePlanet, 5000);
-  }
-
-  componentWillUnmount() {
-    console.log('componentWillUnMount()');
   }
 
   onPlanetLoaded = planet => {
@@ -42,7 +37,6 @@ class RandomPlanet extends Component {
   };
 
   updatePlanet = () => {
-    console.log('Update()');
     const id = Math.floor(Math.random() * 17 + 2);
     this.swapiService
       .getPlanet(id)
@@ -51,7 +45,6 @@ class RandomPlanet extends Component {
   };
 
   render() {
-    console.log('render()');
     const { planet, loading, error } = this.state;
 
     const hasdata = !(loading || error);
@@ -100,3 +93,7 @@ const PlanetView = ({ planet }) => {
 };
 
 export default RandomPlanet;
+
+PlanetView.propTypes = {
+  planet: PropTypes.object.isRequired
+};
