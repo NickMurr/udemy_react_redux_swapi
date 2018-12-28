@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/prefer-stateless-function */
 /* eslint-disable jsx-a11y/alt-text */
@@ -5,6 +6,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Spinner from './Spinner';
 import SwapiService from '../services/swapi-service';
+
+const Record = ({ item, field, label }) => (
+  <li className="list-group-item">
+    <span className="term">{label}</span>
+    <span>{item[field]}</span>
+  </li>
+);
+
+export { Record };
 
 export default class ItemDetails extends Component {
   swapiService = new SwapiService();
@@ -46,13 +56,17 @@ export default class ItemDetails extends Component {
 
   render() {
     const { item, image } = this.state;
+    const { children } = this.props;
+
     if (!item) {
       return <Spinner />;
     }
     const { loading } = this.state;
     const hasdata = !loading;
     const spinner = loading ? <Spinner /> : null;
-    const content = hasdata ? <PersonView item={item} image={image} /> : null;
+    const content = hasdata ? (
+      <PersonView item={item} image={image} children={children} />
+    ) : null;
 
     return (
       <div className="person-details card">
@@ -63,11 +77,8 @@ export default class ItemDetails extends Component {
   }
 }
 
-const PersonView = ({ item, image }) => {
-  // const { image } = this.state;
-
-  const { name, gender, birthYear, eyeColor } = item;
-
+const PersonView = ({ item, image, children }) => {
+  const { id, name, gender, birthYear, eyeColor } = item;
   return (
     <React.Fragment>
       <img className="person-image" src={image} />
@@ -75,18 +86,9 @@ const PersonView = ({ item, image }) => {
       <div className="card-body">
         <h4>{name}</h4>
         <ul className="list-group list-group-flush">
-          <li className="list-group-item">
-            <span className="term">Gender</span>
-            <span>{gender}</span>
-          </li>
-          <li className="list-group-item">
-            <span className="term">Birth Year</span>
-            <span>{birthYear}</span>
-          </li>
-          <li className="list-group-item">
-            <span className="term">Eye Color</span>
-            <span>{eyeColor}</span>
-          </li>
+          {React.Children.map(children, child =>
+            React.cloneElement(child, { item })
+          )}
         </ul>
       </div>
     </React.Fragment>
@@ -101,6 +103,10 @@ ItemDetails.propTypes = {
 };
 
 PersonView.propTypes = {
-  item: PropTypes.object.isRequired,
   image: PropTypes.string.isRequired
+};
+
+Record.propTypes = {
+  field: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired
 };

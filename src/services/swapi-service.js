@@ -68,11 +68,11 @@ class SwapiService {
     name: starship.name,
     model: starship.model,
     manufacture: starship.manufacture,
-    costInCredits: starship.costInCredits,
+    costInCredits: starship.cost_in_credits,
     length: starship.length,
     crew: starship.crew,
     passengers: starship.passengers,
-    cargoCapacity: starship.cargoCapacity
+    cargoCapacity: starship.cargo_capacity
   });
 
   _transformPerson = person => ({

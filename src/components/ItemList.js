@@ -1,3 +1,4 @@
+/* eslint-disable react/no-multi-comp */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/jsx-filename-extension */
@@ -5,56 +6,37 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Spinner from './Spinner';
+import SwapiService from '../services/swapi-service';
+import { withData } from './hoc-helpers';
 
-class ItemList extends Component {
-  state = {
-    itemList: null
-  };
+const ItemList = props => {
+  const { data, onItemSelected, children: renderLabel } = props;
 
-  componentDidMount() {
-    const { getData } = this.props;
+  const items = data.map(item => {
+    const { id } = item;
+    const label = renderLabel(item);
 
-    getData().then(itemList => {
-      this.setState({
-        itemList
-      });
-    });
-  }
+    return (
+      <li
+        className="list-group-item"
+        key={id}
+        onClick={() => onItemSelected(id)}
+      >
+        {label}
+      </li>
+    );
+  });
 
-  renderItems(arr) {
-    const { onItemSelected, children } = this.props;
+  return <ul className="item-list list-group">{items}</ul>;
+};
 
-    return arr.map(item => {
-      const { id } = item;
-      const label = children(item);
-      return (
-        <li
-          className="list-group-item"
-          key={id}
-          onClick={() => onItemSelected(id)}
-        >
-          {label}
-        </li>
-      );
-    });
-  }
+const { getAllPeople } = new SwapiService();
 
-  render() {
-    const { itemList } = this.state;
-
-    if (!itemList) {
-      return <Spinner />;
-    }
-    const items = this.renderItems(itemList);
-    return <ul className="item-list list-group">{items}</ul>;
-  }
-}
+export default withData(ItemList, getAllPeople);
 
 ItemList.propTypes = {
   onItemSelected: PropTypes.func.isRequired
 };
-
-export default ItemList;
 
 ItemList.propTypes = {
   getData: PropTypes.func.isRequired,
