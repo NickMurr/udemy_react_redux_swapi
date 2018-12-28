@@ -5,7 +5,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Spinner from './Spinner';
-import SwapiService from '../services/swapi-service';
 
 const Record = ({ item, field, label }) => (
   <li className="list-group-item">
@@ -17,8 +16,6 @@ const Record = ({ item, field, label }) => (
 export { Record };
 
 export default class ItemDetails extends Component {
-  swapiService = new SwapiService();
-
   state = {
     item: null,
     image: null,
@@ -78,7 +75,7 @@ export default class ItemDetails extends Component {
 }
 
 const PersonView = ({ item, image, children }) => {
-  const { id, name, gender, birthYear, eyeColor } = item;
+  const { name } = item;
   return (
     <React.Fragment>
       <img className="person-image" src={image} />
