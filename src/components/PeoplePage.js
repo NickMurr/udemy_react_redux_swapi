@@ -2,17 +2,11 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import ItemList from './ItemList';
-import PersonDetails from './PersonDetails';
+import ItemDetails from './ItemDetails';
 import ErrorIndicator from './ErrorIndicator';
 import SwapiService from '../services/swapi-service';
 import ErrorBoundry from './ErrorBoundry';
-
-const Row = ({ left, right }) => (
-  <div className="row mb2">
-    <div className="col-md-6">{left}</div>
-    <div className="col-md-6">{right}</div>
-  </div>
-);
+import Row from './Row';
 
 class PeoplePage extends Component {
   swapiService = new SwapiService();
@@ -44,11 +38,11 @@ class PeoplePage extends Component {
       </ItemList>
     );
 
-    const personDetails = <PersonDetails personId={selectedPerson} />;
+    const itemDetails = <ItemDetails itemId={selectedPerson} />;
 
     return (
       <ErrorBoundry>
-        <Row left={itemList} right={personDetails} />
+        <Row left={itemList} right={itemDetails} />
       </ErrorBoundry>
     );
   }
