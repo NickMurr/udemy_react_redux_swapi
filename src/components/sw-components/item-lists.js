@@ -4,7 +4,7 @@
 import React from 'react';
 
 import ItemList from '../ItemList';
-import { withData } from '../hoc-helpers';
+import withData from '../hoc-helpers/with-data';
 import SwapiService from '../../services/swapi-service';
 
 const swapiService = new SwapiService();

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Spinner from './Spinner';
+import Spinner from '../Spinner';
 
 const withData = (View, getData) =>
   class extends Component {
@@ -26,4 +26,4 @@ const withData = (View, getData) =>
     }
   };
 
-export { withData };
+export default withData;
