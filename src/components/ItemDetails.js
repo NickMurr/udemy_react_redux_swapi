@@ -95,7 +95,6 @@ const PersonView = ({ item, image, children }) => {
 ItemDetails.propTypes = {
   // personId: PropTypes.string.isRequired
   getData: PropTypes.func.isRequired,
-  getImageUrl: PropTypes.func.isRequired,
   itemId: PropTypes.number.isRequired
 };
 
