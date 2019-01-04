@@ -6,6 +6,8 @@ import ErrorBoundry from './ErrorBoundry';
 
 import '../scss/main.scss';
 
+import { SwapiServiceProvider } from './swapi-service-context/index';
+
 import {
   PersonList,
   PlanetList,
@@ -21,18 +23,20 @@ class App extends Component {
   render() {
     return (
       <ErrorBoundry>
-        <div className="container">
-          <Header />
-          <RandomPlanet />
+        <SwapiServiceProvider value={this.swapiService}>
+          <div className="container">
+            <Header />
+            <RandomPlanet />
 
-          <PersonDetails itemId={11} />
-          <PlanetDetails itemId={5} />
-          <StarshipDetails itemId={9} />
+            <PersonDetails itemId={11} />
+            <PlanetDetails itemId={5} />
+            <StarshipDetails itemId={9} />
 
-          <PersonList />
-          <StarshipList />
-          <PlanetList />
-        </div>
+            <PersonList />
+            <StarshipList />
+            <PlanetList />
+          </div>
+        </SwapiServiceProvider>
       </ErrorBoundry>
     );
   }

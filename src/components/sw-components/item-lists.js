@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable react/jsx-closing-tag-location */
+/* eslint-disable react/jsx-indent */
 import React from 'react';
 
 import ItemList from '../ItemList';
@@ -19,7 +22,6 @@ const renderModelEndName = ({ model, name }) => (
 {' '}
 (
 {model}
-{' '}
 )
 </span>
 );
