@@ -1,4 +1,7 @@
+/* eslint-disable react/forbid-prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { withRouter } from 'react-router-dom';
 import Row from '../Row';
 import { PersonList, PersonDetails } from '../sw-components';
@@ -16,3 +19,8 @@ const PeoplePage = ({ history, match }) => {
   );
 };
 export default withRouter(PeoplePage);
+
+PeoplePage.propTypes = {
+  history: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired
+};
