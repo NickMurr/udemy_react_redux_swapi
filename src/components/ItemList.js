@@ -1,4 +1,3 @@
-/* eslint-disable react/no-multi-comp,react/forbid-prop-types */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/jsx-filename-extension */
@@ -23,14 +22,18 @@ const ItemList = props => {
       </li>
     );
   });
-
   return <ul className="item-list list-group">{items}</ul>;
 };
 export default ItemList;
 
+ItemList.defaultProps = {
+  onItemSelected: () => {}
+};
+
 ItemList.propTypes = {
-  onItemSelected: PropTypes.func.isRequired,
-  data: PropTypes.array.isRequired
+  onItemSelected: PropTypes.func,
+  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  children: PropTypes.func.isRequired
 };
 
 ItemList.propTypes = {
