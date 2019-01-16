@@ -50,13 +50,13 @@ class SwapiService {
 
   getPlanetImage = ({ id }) => `${this._imageBase}/planets/${id}.jpg`;
 
-  _extractId(item) {
+  static _extractId(item) {
     const idRegExp = /\/([0-9]*)\/$/;
     return item.url.match(idRegExp)[1];
   }
 
   _transformPlanet = planet => ({
-    id: this._extractId(planet),
+    id: SwapiService._extractId(planet),
     name: planet.name,
     population: planet.population,
     rotationPeriod: planet.rotation_period,
@@ -64,7 +64,7 @@ class SwapiService {
   });
 
   _transformStarship = starship => ({
-    id: this._extractId(starship),
+    id: SwapiService._extractId(starship),
     name: starship.name,
     model: starship.model,
     manufacture: starship.manufacture,
@@ -76,7 +76,7 @@ class SwapiService {
   });
 
   _transformPerson = person => ({
-    id: this._extractId(person),
+    id: SwapiService._extractId(person),
     name: person.name,
     gender: person.gender,
     birthYear: person.birth_year,
@@ -85,12 +85,3 @@ class SwapiService {
 }
 
 export default SwapiService;
-
-// const arr1 = [1, 5, 8, 10];
-// const arr2 = [2, 4, 7];
-
-// const output = [...arr1, ...arr2]
-//   .sort((a, b) => a - b)
-//   .reverse()
-//   .reduce((prev, curr) => prev + curr);
-// console.log(output);

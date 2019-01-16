@@ -8,14 +8,7 @@ import '../scss/main.scss';
 
 import { SwapiServiceProvider } from './swapi-service-context/index';
 
-import {
-  PersonList,
-  PlanetList,
-  StarshipList,
-  PersonDetails,
-  PlanetDetails,
-  StarshipDetails
-} from './sw-components';
+import { PeoplePage, PlanetPage, StarshipPage } from './pages';
 
 class App extends Component {
   swapiService = new SwapiService();
@@ -28,13 +21,9 @@ class App extends Component {
             <Header />
             <RandomPlanet />
 
-            <PersonDetails itemId={11} />
-            <PlanetDetails itemId={5} />
-            <StarshipDetails itemId={9} />
-
-            <PersonList />
-            <StarshipList />
-            <PlanetList />
+            <PeoplePage />
+            <PlanetPage />
+            <StarshipPage />
           </div>
         </SwapiServiceProvider>
       </ErrorBoundry>

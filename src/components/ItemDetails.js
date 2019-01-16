@@ -21,7 +21,7 @@ export default class ItemDetails extends Component {
     image: null,
     loading: false
   };
-
+  
   componentDidMount() {
     this.updateItem();
   }
@@ -94,8 +94,7 @@ const PersonView = ({ item, image, children }) => {
 
 ItemDetails.propTypes = {
   // personId: PropTypes.string.isRequired
-  getData: PropTypes.func.isRequired,
-  itemId: PropTypes.number.isRequired
+  getData: PropTypes.func.isRequired
 };
 
 PersonView.propTypes = {

@@ -1,28 +1,21 @@
-/* eslint-disable prettier/prettier */
+/* eslint-disable prettier/prettier,react/prop-types */
 /* eslint-disable react/jsx-closing-tag-location */
 /* eslint-disable react/jsx-indent */
 import React from 'react';
 
 import ItemList from '../ItemList';
-import { withData, withSwapiService } from '../hoc-helpers/index';
-
-const withChildFunction = (Wrapped, fn) => props => (
-  <Wrapped {...props}>{fn}</Wrapped>
-);
+import { withData, withSwapiService, compose, withChildFunction } from '../hoc-helpers/index';
 
 const renderName = ({ name }) => <span>{name}</span>;
 const renderModelEndName = ({ model, name }) => (
   <span>
     {name}
-{' '}
-(
+	{' '}
+	(
+	
 {model}
-)
-</span>
-);
-
-const ListWithChildrenClassic = withChildFunction(ItemList, renderName);
-const ListWithChildrenShips = withChildFunction(ItemList, renderModelEndName);
+	)
+</span>);
 
 const mapPersonMethodsToProps = swapiService => ({
   getData: swapiService.getAllPeople
@@ -34,17 +27,19 @@ const mapStarshipMethodsToProps = swapiService => ({
   getData: swapiService.getAllStarships
 });
 
-const PersonList = withSwapiService(
-  withData(ListWithChildrenClassic),
-  mapPersonMethodsToProps
-);
-const PlanetList = withSwapiService(
-  withData(ListWithChildrenClassic),
-  mapPlanetMethodsToProps
-);
-const StarshipList = withSwapiService(
-  withData(ListWithChildrenShips),
-  mapStarshipMethodsToProps
-);
+const PersonList = compose(
+  withSwapiService(mapPersonMethodsToProps),
+  withData,
+  withChildFunction(renderName))(ItemList);
+
+const PlanetList = compose(
+  withSwapiService(mapPlanetMethodsToProps),
+  withData,
+  withChildFunction(renderModelEndName))(ItemList);
+	
+const StarshipList = compose(
+  withSwapiService(mapStarshipMethodsToProps),
+  withData,
+  withChildFunction(renderModelEndName))(ItemList);
 
 export { PersonList, PlanetList, StarshipList };

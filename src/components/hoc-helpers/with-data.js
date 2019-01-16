@@ -4,7 +4,9 @@ import Spinner from '../Spinner';
 const withData = View =>
   class extends Component {
     state = {
-      data: null
+      data: null,
+      loading: false,
+      error: false
     };
 
     componentDidMount() {
